@@ -14,12 +14,12 @@ Description   = TX code for the Arduino Nano.
 
 // ============================== TX PARAMETERS (MODIFY AS NEEDED) ===========================
 // --------------- Pertaining to message to be transmitted ---------------
-const size_t MSG_LEN = 11;
-char message_str[MSG_LEN] = "hello_world";
+const size_t MSG_LEN = 11;  // 11; 21; 34
+char message_str[MSG_LEN] = "hello_world";  // hello_world; embedded_systems_rock; c_is_the_best_programming_language
 // --------------- Pertaining to data transmission ---------------
-const uint32_t pulse_width_us = 300;  // 300
-const uint32_t f_carrier_Hz = 1200;   // 1200
-const uint32_t f_deviation_Hz = 50;  // 50
+const uint32_t pulse_width_us = 300;  // Must be below 1e6 / f_carrier_Hz. 
+const uint32_t f_carrier_Hz = 1200;   // 1200; 600; 2400
+const uint32_t f_deviation_Hz = 300;  // 50; 10; 300
 const uint16_t start_sync_frame = 0b1111111111111111;
 const uint16_t end_sync_frame = 0b0011001100110011;
 // --------------- Pertaining to error injection ---------------
