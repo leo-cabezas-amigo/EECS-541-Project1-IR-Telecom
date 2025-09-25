@@ -14,16 +14,16 @@ Description   = TX code for the Arduino Nano.
 
 // ============================== TX PARAMETERS (MODIFY AS NEEDED) ===========================
 // --------------- Pertaining to message to be transmitted ---------------
-const size_t MSG_LEN = 11;  // 11; 21; 34
-char message_str[MSG_LEN] = "hello_world";  // hello_world; embedded_systems_rock; c_is_the_best_programming_language
+const size_t MSG_LEN = 11;  // 11; 21; 27
+char message_str[MSG_LEN] = "hello_world";  // hello_world; embedded_systems_rock; c_is_the_best_language_ever
 // --------------- Pertaining to data transmission ---------------
-const uint32_t pulse_width_us = 300;  // Must be below 1e6 / f_carrier_Hz. 
+const uint32_t pulse_width_us = 500;  // Must be below 1e6 / f_carrier_Hz. 
 const uint32_t f_carrier_Hz = 1200;   // 1200; 600; 2400
-const uint32_t f_deviation_Hz = 300;  // 50; 10; 300
+const uint32_t f_deviation_Hz = 50;   // 50; 10; 300
 const uint16_t start_sync_frame = 0b1111111111111111;
 const uint16_t end_sync_frame = 0b0011001100110011;
 // --------------- Pertaining to error injection ---------------
-const bool enable_error_injection = true;
+const bool enable_error_injection = false;
 const size_t TARGET_COUNT = 4;
 const size_t target_frame_idx1[TARGET_COUNT]= {0,1,2,3};
 const size_t target_bit_idx1[TARGET_COUNT]= {3,3,3,3};
@@ -164,7 +164,7 @@ void sendMessage(
       digitalWrite(TXpin, LOW);
       delayMicroseconds(message_tx_us[i][j] - pulse_width_us);
     }
-    //delayMicroseconds(2000);  // Comment out
+    // if (i != MSG_LEN + 1){delayMicroseconds(2000);}  // Uncomment to clearly visualize frames in the oscilloscope
   }
   digitalWrite(TXpin, HIGH);
   delayMicroseconds(pulse_width_us);
@@ -182,5 +182,5 @@ void setup(){
 
 void loop(){
   sendMessage(message_tx_us, pulse_width_us, TXpin);  // To send only once, move to setup();
-  delayMicroseconds(1000);  // 600 min., 1000 works, 8000 for waveform
+  delayMicroseconds(2000);  // 600 min., 1000 works, 2000 most stable, 8000 for waveform
 }
