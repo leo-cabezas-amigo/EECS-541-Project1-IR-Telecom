@@ -1,7 +1,6 @@
 /*
 File name     = rx_nano.ino
 Author        = Leo Cabezas
-Credits       = Credit to Kieran for implementing hammingCorrectNibble().
 Project       = Project 1 (IR data transmission system)
 Course        = EECS 541
 Description   = RX code for the Arduino Nano.
@@ -16,11 +15,11 @@ Description   = RX code for the Arduino Nano.
 const size_t MAX_MSG_LEN =  133;      // Maximum permitted message length (in char).
 // --------------- Pertaining to data reception ---------------
 const uint32_t f_carrier_Hz = 1200;   // Carrier frequency.
-const uint32_t f_deviation_Hz = 100;  // Deviation frequency (up/down) from f_carrier_Hz.
+const uint32_t f_deviation_Hz = 50;  // Deviation frequency (up/down) from f_carrier_Hz.
 const uint16_t start_sync_frame = 0b1111111111111111;
 const uint16_t end_sync_frame = 0b0011001100110011;
 // --------------- Pertaining to error correction ---------------
-const bool enable_error_correction = true;
+const bool enable_error_correction = false;
 // --------------- Pertaining to Arduino Nano setup ---------------
 const uint8_t RXpin = 2;
 
